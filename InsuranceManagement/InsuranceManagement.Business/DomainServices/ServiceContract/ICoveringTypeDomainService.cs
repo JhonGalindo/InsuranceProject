@@ -1,0 +1,10 @@
+﻿using InsuranceManagement.Dto;
+using System.Collections.Generic;
+
+namespace InsuranceManagement.Business.DomainServices.ServiceContract
+{
+    public interface ICoveringTypeDomainService
+    {
+        List<CoveringTypeDto> ObtenerTiposCubrimiento();
+    }
+}

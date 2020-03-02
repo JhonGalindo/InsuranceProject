@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsuranceManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CoveringType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Policies" Relationship="Self.FK_Policy_CoveringType" FromRole="CoveringType" ToRole="Policy" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="IdentificationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Policies" Relationship="Self.FK_Policy_Customer" FromRole="Customer" ToRole="Policy" />
+  </EntityType>
+  <EntityType Name="Policy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CoveringPeriod" Type="Int16" Nullable="false" />
+    <Property Name="PolicyRate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CoveringTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RiskTypeId" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="Covering" Type="Int16" Nullable="false" />
+    <Property Name="State" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CoveringType" Relationship="Self.FK_Policy_CoveringType" FromRole="Policy" ToRole="CoveringType" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Policy_Customer" FromRole="Policy" ToRole="Customer" />
+    <NavigationProperty Name="RiskType" Relationship="Self.FK_Policy_RiskType" FromRole="Policy" ToRole="RiskType" />
+  </EntityType>
+  <EntityType Name="RiskType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Policies" Relationship="Self.FK_Policy_RiskType" FromRole="RiskType" ToRole="Policy" />
+    <Property Name="CoveringPercentage" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_Policy_CoveringType">
+    <End Role="CoveringType" Type="Self.CoveringType" Multiplicity="1" />
+    <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CoveringType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Policy">
+        <PropertyRef Name="CoveringTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Policy_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Policy">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Policy_RiskType">
+    <End Role="RiskType" Type="Self.RiskType" Multiplicity="1" />
+    <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RiskType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Policy">
+        <PropertyRef Name="RiskTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InsuranceManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CoveringTypes" EntityType="Self.CoveringType" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Policies" EntityType="Self.Policy" />
+    <EntitySet Name="RiskTypes" EntityType="Self.RiskType" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Policy_CoveringType" Association="Self.FK_Policy_CoveringType">
+      <End Role="CoveringType" EntitySet="CoveringTypes" />
+      <End Role="Policy" EntitySet="Policies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Policy_Customer" Association="Self.FK_Policy_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Policy" EntitySet="Policies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Policy_RiskType" Association="Self.FK_Policy_RiskType">
+      <End Role="RiskType" EntitySet="RiskTypes" />
+      <End Role="Policy" EntitySet="Policies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,8 @@
+C:\Users\jhon.galindo\Documents\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\bin\Debug\InsuranceManagement.Dto.dll
+C:\Users\jhon.galindo\Documents\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\bin\Debug\InsuranceManagement.Dto.pdb
+C:\Users\jhon.galindo\Documents\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\obj\Debug\InsuranceManagement.Dto.dll
+C:\Users\jhon.galindo\Documents\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\obj\Debug\InsuranceManagement.Dto.pdb
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\bin\Debug\InsuranceManagement.Dto.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\bin\Debug\InsuranceManagement.Dto.pdb
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\obj\Debug\InsuranceManagement.Dto.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Dto\obj\Debug\InsuranceManagement.Dto.pdb
