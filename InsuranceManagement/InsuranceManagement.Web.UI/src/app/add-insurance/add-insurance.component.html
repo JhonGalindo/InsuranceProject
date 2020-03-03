@@ -1,0 +1,55 @@
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Adicionar Póliza</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="Nombre">Nombre:</label>
+            <input type="text" maxlength="50" formControlName="Nombre" placeholder="Nombre" name="Nombre" class="form-control" id="Nombre">
+        </div>
+
+        <div class="form-group">
+            <label for="Descripcion">Descripción:</label>
+            <input type="text" maxlength="200" formControlName="Descripcion" placeholder="Descripcion" name="Descripcion" class="form-control" id="Descripcion">
+        </div>
+
+        <div class="form-group">
+            <label for="FechaInicioVigencia">Fecha de nacimiento:</label>
+            <input type="date" formControlName="FechaInicioVigencia" placeholder="Fecha inicio vigencia" name="FechaInicioVigencia" class="form-control" id="FechaInicioVigencia">
+        </div>
+
+        <div class="form-group">
+            <label for="PeriodoCobertura">Período de cobertura:</label>
+            <input type="number" maxlength="3" formControlName="PeriodoCobertura" placeholder="Período de cobertura" name="PeriodoCobertura" class="form-control" id="PeriodoCobertura">
+        </div>
+
+        <div class="form-group">
+            <label for="PrecioPoliza">Precio póliza:</label>
+            <input type="number" maxlength="7" formControlName="PrecioPoliza" placeholder="Precio póliza" name="PrecioPoliza" class="form-control" id="PrecioPoliza">
+        </div>
+
+        <div class="form-group">
+            <label for="typecovering">Tipo covertura:</label>
+            <select formControlName="IdTipoCubrimiento" id="IdTipoCubrimiento">
+                <option value="0"></option>
+                <option *ngFor="let tytypepecovering of typescovering; let i = index" [value]="typescovering[i].IdTipoCubrimiento">
+                    {{typescovering[i].Nombre}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="typerisk">Tipo riesgo:</label>
+            <select formControlName="IdTipoRiesgo" id="IdTipoRiesgo">
+                <option value="0"></option>
+                <option *ngFor="let type of typesrisk; let i = index" [value]="typesrisk[i].IdTipoRiesgo">
+                    {{typesrisk[i].Nombre}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Cobertura">Cobertura:</label>
+            <input type="number" maxlength="3" formControlName="Cobertura" placeholder="Cobertura" name="Cobertura" class="form-control" id="Cobertura">
+        </div>
+
+        <button class="btn btn-success">Crear</button>
+    </form>
+</div>

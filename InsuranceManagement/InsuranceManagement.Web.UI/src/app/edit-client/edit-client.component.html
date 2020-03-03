@@ -1,0 +1,29 @@
+<div class="col-md-6 user-container">
+  <h2 class="text-center">Editar Cliente</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="hidden">
+      <input type="text" formControlName="IdCliente" placeholder="idcliente" name="IdCliente" class="form-control" id="IdCliente">
+    </div>
+    <div class="form-group">
+      <label for="Nombres">Nombres:</label>
+      <input type="text" maxlength="50" formControlName="Nombres" placeholder="Nombres" name="Nombres" class="form-control" id="Nombres">
+    </div>
+
+    <div class="form-group">
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" maxlength="50" formControlName="Apellidos" placeholder="Apellidos" name="Apellidos" class="form-control" id="Apellidos">
+    </div>
+
+    <div class="form-group">
+      <label for="fechanacimiento">Fecha de nacimiento:</label>
+      <input type="date" formControlName="FechaNacimiento" placeholder="Fecha de nacimiento" name="FechaNacimiento" class="form-control" id="FechaNacimiento">
+    </div>
+
+    <div class="form-group">
+      <label for="cedula">Cedula:</label>
+      <input type="number" maxlength="10" formControlName="Cedula" placeholder="Cédula" name="Cedula" class="form-control" id="Cedula">
+    </div>
+
+    <button class="btn btn-success">Actualizar</button>
+  </form>
+</div>
