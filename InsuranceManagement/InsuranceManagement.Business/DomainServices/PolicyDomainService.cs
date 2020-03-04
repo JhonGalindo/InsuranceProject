@@ -10,16 +10,16 @@ namespace InsuranceManagement.Business.DomainServices
 {
     public class PolicyDomainService : IPolicyDomainService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PolicyDomainService(UnitOfWork unitOfWork)
+        public PolicyDomainService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         public List<PolicyDto> GetPolicies()
         {
-            var policies = _unitOfWork.PolicyRepository.GetAll();
+            var policies = _unitOfWork.PolicyRepository.GetAll().ToList();
 
             return policies.Select(policy => policy.ConvertToDto()).ToList();
         }

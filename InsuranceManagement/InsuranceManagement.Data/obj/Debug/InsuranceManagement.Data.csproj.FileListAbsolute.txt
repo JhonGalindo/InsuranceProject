@@ -16,7 +16,7 @@ C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\bin\De
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\bin\Debug\EntityFramework.SqlServer.dll
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\bin\Debug\EntityFramework.xml
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\bin\Debug\EntityFramework.SqlServer.xml
-C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\obj\Debug\InsuranceManagement.Data.csprojAssemblyReference.cache
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\obj\Debug\InsuranceManagement.Data.csproj.CopyComplete
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\obj\Debug\InsuranceManagement.Data.dll
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\obj\Debug\InsuranceManagement.Data.pdb
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Data\obj\Debug\InsuranceManagement.Data.csprojAssemblyReference.cache

@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace InsuranceManagement.Web.Api
 {
-    [RoutePrefix("policies")]
+    [RoutePrefix("api/policies")]
     public class PoliciesController : ApiController
     {
         private readonly IPolicyDomainService _policyDomainService;
@@ -18,6 +18,7 @@ namespace InsuranceManagement.Web.Api
         }
 
         [HttpGet]
+        [Route("", Name ="GetAllPolicies")]
         public IHttpActionResult GetAll()
         {
             var response = _policyDomainService.GetPolicies();
@@ -30,7 +31,7 @@ namespace InsuranceManagement.Web.Api
         }
 
         [HttpGet]
-        [ActionName("policyId")]
+        [Route("{id:int}")]
         public IHttpActionResult GetById(int id)
         {
             var response = _policyDomainService.GetPolicyById(id);
@@ -47,7 +48,7 @@ namespace InsuranceManagement.Web.Api
         }
 
         [HttpGet]
-        [ActionName("customerPolicies")]
+        [Route("customerPolicies")]
         public IHttpActionResult GetPoliciesByCustomer(int customerId)
         {
             var response = _policyDomainService.GetPoliciesByCustomer(customerId);
