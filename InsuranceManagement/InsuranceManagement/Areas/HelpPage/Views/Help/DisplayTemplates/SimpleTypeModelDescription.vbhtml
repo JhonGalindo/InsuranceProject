@@ -1,3 +1,0 @@
-@Imports InsuranceManagement.Areas.HelpPage.ModelDescriptions
-@ModelType SimpleTypeModelDescription
-@Model.Documentation
