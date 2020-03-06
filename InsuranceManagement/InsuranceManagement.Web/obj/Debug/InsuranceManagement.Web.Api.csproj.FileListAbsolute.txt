@@ -106,3 +106,14 @@ C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\obj\Deb
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\obj\Debug\InsuranceManagement.Web.Api.csproj.CopyComplete
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\obj\Debug\InsuranceManagement.Web.dll
 C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\obj\Debug\InsuranceManagement.Web.pdb
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\Microsoft.IdentityModel.Logging.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\Microsoft.IdentityModel.Logging.xml
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\System.Web.Cors.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\System.Web.Http.Cors.dll
+C:\Projects\InsuranceProject\InsuranceManagement\InsuranceManagement.Web\bin\System.Web.Http.Cors.xml

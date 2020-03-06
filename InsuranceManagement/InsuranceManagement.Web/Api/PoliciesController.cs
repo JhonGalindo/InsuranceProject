@@ -1,7 +1,9 @@
 ﻿using InsuranceManagement.Business.DomainServices.ServiceContract;
 using InsuranceManagement.Dto;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 
@@ -12,111 +14,186 @@ namespace InsuranceManagement.Web.Api
     {
         private readonly IPolicyDomainService _policyDomainService;
 
+        private const string PoliciyGetById = "PoliciyGetById";
+
         public PoliciesController(IPolicyDomainService policyDomainService)
         {
             _policyDomainService = policyDomainService;
         }
 
-        [HttpGet]
-        [Route("", Name ="GetAllPolicies")]
-        public IHttpActionResult GetAll()
+        [HttpGet, Route("", Name = "GetAllPolicies")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(PolicyDto))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.Forbidden)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        public IHttpActionResult Get()
         {
-            var response = _policyDomainService.GetPolicies();
-
-            if (response == null)
+            try
             {
-                return NotFound();
+                var response = _policyDomainService.GetPolicies();
+
+                if (response == null || !response.Any())
+                {
+                    return NotFound();
+                }
+
+                return Ok(response);
             }
-            return Ok(response);
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
         }
 
-        [HttpGet]
-        [Route("{id:int}")]
-        public IHttpActionResult GetById(int id)
+        [HttpGet, Route("{policyId}", Name = PoliciyGetById)]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(PolicyDto))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.Forbidden)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        public IHttpActionResult GetById(int policyId)
         {
-            var response = _policyDomainService.GetPolicyById(id);
+            try
+            {
+                if (policyId <= 0)
+                {
+                    return BadRequest();
+                }
 
-            if (response == null)
-            {
-                return NotFound();
+                var response = _policyDomainService.GetPolicyById(policyId);
+
+                if (response == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(response);
             }
-            return Ok(new Response<PolicyDto>
+            catch (Exception)
             {
-                result = response,
-                status = (int)HttpStatusCode.OK
-            });
+                return InternalServerError();
+            }
         }
 
-        [HttpGet]
-        [Route("customerPolicies")]
+        [HttpGet, Route("customerPolicies/{customerId}", Name = "GetPolicyByCustomer")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(PolicyDto))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.Forbidden)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
         public IHttpActionResult GetPoliciesByCustomer(int customerId)
         {
-            var response = _policyDomainService.GetPoliciesByCustomer(customerId);
-
-            if (response == null)
+            try
             {
-                return NotFound();
+                if (customerId <= 0)
+                {
+                    return BadRequest();
+                }
+
+                var response = _policyDomainService.GetPoliciesByCustomer(customerId);
+
+                if (response == null || !response.Any())
+                {
+                    return NotFound();
+                }
+
+                return Ok(response);
             }
-
-            return Ok(new Response<List<PolicyDto>>
+            catch (Exception)
             {
-                result = response,
-                status = (int)HttpStatusCode.OK
-            });
+                return InternalServerError();
+            }
         }
 
+        [HttpPost, Route("")]
+        [SwaggerResponseRemoveDefaults]
+        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(PolicyDto))]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.Forbidden)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
         public IHttpActionResult Post([FromBody]PolicyDto policy)
         {
             try
             {
-                _policyDomainService.CreatePolicy(policy);
+                if (policy == null)
+                {
+                    return BadRequest();
+                }
 
-                return Ok(new Response<string>
+                var response = _policyDomainService.CreatePolicy(policy);
+
+                if(!string.IsNullOrEmpty(response.ValidationMessage))
                 {
-                    status = (int)HttpStatusCode.OK
-                });
+                    return BadRequest(response.ValidationMessage);
+                }
+
+                return Ok(response.Policy);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Ok(new Response<string>
-                {
-                    message = ex.Message,
-                    status = (int)HttpStatusCode.BadRequest
-                });
+                return InternalServerError();
             }
         }
 
+        [HttpPut, Route("")]
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(PolicyDto))]
+        [SwaggerResponse(HttpStatusCode.Forbidden)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
         public IHttpActionResult Put(int id, [FromBody]PolicyDto policy)
         {
             try
             {
-                _policyDomainService.UpdatePolicy(policy);
-
-                return Ok(new Response<string>
+                if (policy == null)
                 {
-                    status = (int)HttpStatusCode.OK
-                });
+                    return BadRequest();
+                }
+
+                var response = _policyDomainService.UpdatePolicy(id, policy);
+
+                if (!string.IsNullOrEmpty(response.ValidationMessage))
+                {
+                    return BadRequest(response.ValidationMessage);
+                }
+
+                if (response.Policy == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(response.Policy);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Ok(new Response<string>
-                {
-                    message = ex.Message,
-                    status = (int)HttpStatusCode.BadRequest
-                });
+                return InternalServerError();
             }
         }
 
-        public IHttpActionResult Delete(List<int> policyIds)
+        [HttpDelete, Route("{policyId}")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.Forbidden)]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        public IHttpActionResult Delete(int policyId)
         {
-            _policyDomainService.DeletePolicies(policyIds);
-            
-            return Ok();
-        }
+            try
+            {
+                if (policyId <= 0)
+                {
+                    return BadRequest();
+                }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
+                _policyDomainService.DeletePolicies(policyId);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

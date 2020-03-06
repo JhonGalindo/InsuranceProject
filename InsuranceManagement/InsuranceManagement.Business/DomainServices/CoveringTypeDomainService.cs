@@ -8,14 +8,14 @@ namespace InsuranceManagement.Business.DomainServices
 {
     public class CoveringTypeDomainService : ICoveringTypeDomainService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CoveringTypeDomainService(UnitOfWork unitOfWork)
+        public CoveringTypeDomainService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public List<CoveringTypeDto> ObtenerTiposCubrimiento()
+        public List<CoveringTypeDto> GetCoveringTypes()
         {
             var coveringTypes = _unitOfWork.CoveringTypeRepository.GetAll().ToList();
 

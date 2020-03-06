@@ -3,7 +3,6 @@ using InsuranceManagement.Business.DomainServices.ServiceContract;
 using InsuranceManagement.Data.UnitOfWork;
 using System.Web.Http;
 using Unity;
-using Unity.Lifetime;
 using Unity.WebApi;
 
 namespace InsuranceManagement.Web
@@ -14,11 +13,11 @@ namespace InsuranceManagement.Web
         {
 			var container = new UnityContainer();
             
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-            
-            // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IPolicyDomainService, PolicyDomainService>()
+                .RegisterType<ICustomerDomainService, CustomerDomainService>()
+                .RegisterType<ICoveringTypeDomainService, CoveringTypeDomainService>()
+                .RegisterType<IRiskTypeDomainService, RiskTypeDomainService>()
+                .RegisterType<IUserDomainService, UserDomainService>()
                 .RegisterType<IUnitOfWork, UnitOfWork>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

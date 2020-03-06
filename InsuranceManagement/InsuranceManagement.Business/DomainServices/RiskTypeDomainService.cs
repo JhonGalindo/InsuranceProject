@@ -8,9 +8,9 @@ namespace InsuranceManagement.Business.DomainServices
 {
     public class RiskTypeDomainService : IRiskTypeDomainService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RiskTypeDomainService(UnitOfWork unitOfWork)
+        public RiskTypeDomainService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -22,7 +22,8 @@ namespace InsuranceManagement.Business.DomainServices
             return riskTypes.Select(t => new RiskTypeDto
             {
                 Id = t.Id,
-                Description = t.Description
+                Description = t.Description,
+                CoveringPercentage = t.CoveringPercentage
             }).ToList(); ;
         }
     }

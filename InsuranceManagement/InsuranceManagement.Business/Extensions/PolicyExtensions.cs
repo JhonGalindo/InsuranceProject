@@ -24,11 +24,13 @@ namespace InsuranceManagement.Business.Extensions
                {
                    Id = policy.CoveringType.Id,
                    Description = policy.CoveringType.Description
+                   
                },
                RiskType = new RiskTypeDto
                {
                    Id = policy.RiskType.Id,
-                   Description = policy.RiskType.Description
+                   Description = policy.RiskType.Description,
+                   CoveringPercentage = policy.RiskType.CoveringPercentage                   
                }
             };
 

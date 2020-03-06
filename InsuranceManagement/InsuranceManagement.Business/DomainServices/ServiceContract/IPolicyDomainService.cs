@@ -11,10 +11,10 @@ namespace InsuranceManagement.Business.DomainServices.ServiceContract
 
         List<PolicyDto> GetPoliciesByCustomer(int customerId);
 
-        void CreatePolicy(PolicyDto policy);
+        (string ValidationMessage, PolicyDto Policy) CreatePolicy(PolicyDto policy);
 
-        void UpdatePolicy(PolicyDto policy);
+        (string ValidationMessage, PolicyDto Policy) UpdatePolicy(int id, PolicyDto policy);
 
-        void DeletePolicies(List<int> policieIds);
+        void DeletePolicies(int policyId);
     }
 }

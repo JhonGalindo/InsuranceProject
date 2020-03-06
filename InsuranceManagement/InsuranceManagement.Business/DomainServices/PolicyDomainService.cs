@@ -2,7 +2,6 @@
 using InsuranceManagement.Business.Extensions;
 using InsuranceManagement.Data.UnitOfWork;
 using InsuranceManagement.Dto;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,50 +20,58 @@ namespace InsuranceManagement.Business.DomainServices
         {
             var policies = _unitOfWork.PolicyRepository.GetAll().ToList();
 
-            return policies.Select(policy => policy.ConvertToDto()).ToList();
+            return policies?.Select(policy => policy.ConvertToDto()).ToList();
         }
 
         public PolicyDto GetPolicyById(int id)
         {
             var policy = _unitOfWork.PolicyRepository.Find(id);
 
-            return policy.ConvertToDto();
+            return policy?.ConvertToDto();
         }
 
         public List<PolicyDto> GetPoliciesByCustomer(int customerId)
         {
             var policies = _unitOfWork.PolicyRepository.Find(t => t.CustomerId == customerId).ToList();
 
-            return policies.Select(policy => policy.ConvertToDto()).ToList();
+            return policies?.Select(policy => policy.ConvertToDto()).ToList();
         }
 
-        public void CreatePolicy(PolicyDto policy)
+        public (string ValidationMessage, PolicyDto Policy) CreatePolicy(PolicyDto policy)
         {
             var riskType = _unitOfWork.RiskTypeRepository.Find(policy.RiskTypeId);
+            var coveringType = _unitOfWork.CoveringTypeRepository.Find(policy.CoveringTypeId);
 
             if (policy.Covering > riskType.CoveringPercentage)
             {
-                throw new Exception("Covering Percentage not allowed for High risk type.");
+                return ("Covering Percentage not allowed for High risk type.", null);
             }
-
             var policyToCreate = policy.MapToEntity();
 
-            policyToCreate.State = true;
+            policyToCreate.CoveringType = coveringType;
+            policyToCreate.RiskType = riskType;
 
             _unitOfWork.PolicyRepository.Add(policyToCreate);
             _unitOfWork.Save();
+
+            return (string.Empty, policyToCreate.ConvertToDto());
         }
 
-        public void UpdatePolicy(PolicyDto policy)
+        public (string ValidationMessage, PolicyDto Policy) UpdatePolicy(int id, PolicyDto policy)
         {
+            var policyToUpdate = _unitOfWork.PolicyRepository.Find(id);
+
+            if (policyToUpdate == null)
+            {
+                return (string.Empty, null);
+            }
+
             var riskType = _unitOfWork.RiskTypeRepository.Find(policy.RiskTypeId);
 
             if (policy.Covering > riskType.CoveringPercentage)
             {
-                throw new Exception("Covering Percentage not allowed for High risk type.");
+                return("Covering Percentage not allowed for High risk type.", null);
             }
-
-            var policyToUpdate = _unitOfWork.PolicyRepository.Find(policy.Id);
 
             policyToUpdate.Name = policy.Name;
             policyToUpdate.Description = policy.Description;
@@ -79,14 +86,13 @@ namespace InsuranceManagement.Business.DomainServices
 
             _unitOfWork.PolicyRepository.Update(policyToUpdate);
             _unitOfWork.Save();
+
+            return (string.Empty, policyToUpdate.ConvertToDto());
         }
 
-        public void DeletePolicies(List<int> policieIds)
+        public void DeletePolicies(int policyId)
         {
-            foreach (int policyId in policieIds)
-            {
-                _unitOfWork.PolicyRepository.Delete(policyId);
-            }
+            _unitOfWork.PolicyRepository.Delete(policyId);
 
             _unitOfWork.Save();
         }

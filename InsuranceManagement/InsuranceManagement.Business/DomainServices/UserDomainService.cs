@@ -1,11 +1,12 @@
-﻿using InsuranceManagement.Data.UnitOfWork;
+﻿using InsuranceManagement.Business.DomainServices.ServiceContract;
+using InsuranceManagement.Data.UnitOfWork;
 using InsuranceManagement.Dto;
 using System;
 using System.Linq;
 
 namespace InsuranceManagement.Business.DomainServices
 {
-    public class UserDomainService
+    public class UserDomainService: IUserDomainService
     {
         private readonly IUnitOfWork _unitOfWork;
 
