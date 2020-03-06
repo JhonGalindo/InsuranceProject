@@ -13,7 +13,7 @@ namespace InsuranceManagement.Dto
         public int CoveringTypeId { get; set; }
         public int RiskTypeId { get; set; }
         public int CustomerId { get; set; }
-        public short Covering { get; set; }
+        public short CoveringPercentage { get; set; }
         public bool State { get; set; }
 
         public RiskTypeDto RiskType { get; set; }

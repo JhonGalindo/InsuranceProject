@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceManagement.Dto", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceManagement.Data", "InsuranceManagement.Data\InsuranceManagement.Data.csproj", "{D58CA0D9-727A-48E5-92A1-0B23AD83935A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceManagement.Bussines.Tests", "InsuranceManagement.Bussines.Tests\InsuranceManagement.Bussines.Tests.csproj", "{3A1D0207-FBC3-4614-B5D9-A85AAC2A16E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{D58CA0D9-727A-48E5-92A1-0B23AD83935A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D58CA0D9-727A-48E5-92A1-0B23AD83935A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D58CA0D9-727A-48E5-92A1-0B23AD83935A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A1D0207-FBC3-4614-B5D9-A85AAC2A16E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A1D0207-FBC3-4614-B5D9-A85AAC2A16E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A1D0207-FBC3-4614-B5D9-A85AAC2A16E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A1D0207-FBC3-4614-B5D9-A85AAC2A16E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{BB91AF71-2EFC-422A-B0AA-FE1F5510F0EF} = {6CAA3980-0F87-4892-9F07-39DD8004B095}
 		{6E568CE9-942C-41FB-8F57-8A276E79C300} = {F7488EF2-8E19-4735-90ED-F69282830CDA}
 		{D58CA0D9-727A-48E5-92A1-0B23AD83935A} = {A3688EC8-D075-4BC5-BA4F-4417860BBA9A}
+		{3A1D0207-FBC3-4614-B5D9-A85AAC2A16E6} = {383A6314-A5FF-4A41-9A73-8E4E828EE247}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5848F825-8E2D-4BFF-A693-0FEA44FD098F}

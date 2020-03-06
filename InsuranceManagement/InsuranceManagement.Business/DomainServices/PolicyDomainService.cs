@@ -42,9 +42,9 @@ namespace InsuranceManagement.Business.DomainServices
             var riskType = _unitOfWork.RiskTypeRepository.Find(policy.RiskTypeId);
             var coveringType = _unitOfWork.CoveringTypeRepository.Find(policy.CoveringTypeId);
 
-            if (policy.Covering > riskType.CoveringPercentage)
+            if (policy.CoveringPercentage > riskType.CoveringPercentage)
             {
-                return ("Covering Percentage not allowed for High risk type.", null);
+                return ("Covering Percentage not allowed for the risk type.", null);
             }
             var policyToCreate = policy.MapToEntity();
 
@@ -68,7 +68,7 @@ namespace InsuranceManagement.Business.DomainServices
 
             var riskType = _unitOfWork.RiskTypeRepository.Find(policy.RiskTypeId);
 
-            if (policy.Covering > riskType.CoveringPercentage)
+            if (policy.CoveringPercentage > riskType.CoveringPercentage)
             {
                 return("Covering Percentage not allowed for High risk type.", null);
             }
@@ -78,7 +78,7 @@ namespace InsuranceManagement.Business.DomainServices
             policyToUpdate.StartDate = policy.StartDate;
             policyToUpdate.State = policy.State;
             policyToUpdate.CoveringPeriod = policy.CoveringPeriod;
-            policyToUpdate.Covering = policy.Covering;
+            policyToUpdate.Covering = policy.CoveringPercentage;
             policyToUpdate.RiskTypeId = policy.RiskTypeId;
             policyToUpdate.CoveringTypeId = policy.CoveringTypeId;
             policyToUpdate.CustomerId = policy.CustomerId;

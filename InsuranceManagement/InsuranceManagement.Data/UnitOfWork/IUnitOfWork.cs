@@ -1,5 +1,6 @@
 ﻿using InsuranceManagement.Data.EFProvider.DataContext;
 using InsuranceManagement.Data.Repositories;
+using InsuranceManagement.Data.Repositories.Contracts;
 
 namespace InsuranceManagement.Data.UnitOfWork
 {
